@@ -5,7 +5,7 @@ const app = {
   BUILD_DIR: './build', //'build',
   PUBLIC_DIR: '../public',
   DEV_ROOT_DIR: '/',
-  PRD_ROOT_DIR: '/huxy-admin',
+  PRD_ROOT_DIR: '/',
   PROXY: {
     url: 'http://localhost:3203',
     prefix: '/fs',

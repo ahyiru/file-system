@@ -1,5 +1,5 @@
-const {copyfile, movefile, mkdir, touch, readfile, readdir, rmfile, rnfile, readAllFile} = require('../fs');
-const {MAXSIZE} = require('../fs/configs');
+const {copyfile, movefile, mkdir, touch, readfile, readdir, rmfile, rnfile, readAllFile} = require('./fs');
+const {MAXSIZE} = require('./fs/configs');
 
 const startServer = app => {
   app.get('/fs/readdir', async (req, res) => {

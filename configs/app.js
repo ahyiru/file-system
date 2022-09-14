@@ -5,9 +5,10 @@ const app = {
   BUILD_DIR: './build', //'build',
   PUBLIC_DIR: '../public',
   DEV_ROOT_DIR: '/',
-  PRD_ROOT_DIR: '/file-system',
+  PRD_ROOT_DIR: '/',
   PROXY: {
-    url: 'http://localhost:3203',
+    // url: 'http://localhost:3203',
+    url: 'http://47.105.94.51:3333',
     prefix: '/fs',
   },
   MOCK: '127.0.0.1:3202',

@@ -1,5 +1,8 @@
+const {SERVER_PORT} = require('../../configs');
+
 module.exports = {
-  rootpath: '/Users/huyong/Desktop/file-system/app/file-test',
+  rootpath: '/',
   // rootpath: '/root/file-area',
   MAXSIZE: 800,
+  PORT: SERVER_PORT,
 };

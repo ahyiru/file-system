@@ -66,6 +66,8 @@ const dirActions = context.filter(item => item.type !== 'file');
 
 const fileActions = context.filter(item => item.type !== 'dir');
 
+const fixPath = path => path.replace(/\/\//, '/');
+
 const Index = props => {
   const rerender = useUpdate();
   const fileRef = useRef();
@@ -86,9 +88,8 @@ const Index = props => {
     updateList(path);
   }, [path]);
   const changePath = path => {
-    const curPath = path.replace(/\/\//, '/');
-    pathVaule.current = curPath;
-    setPath(curPath);
+    pathVaule.current = path;
+    setPath(path);
   };
   const goBack = () => {
     if (path !== '/') {
@@ -115,7 +116,7 @@ const Index = props => {
     });
   };
   const handleCopy = async ({filename, type}) => {
-    const fullpath = `${path}/${filename}`;
+    const fullpath = fixPath(`${path}/${filename}`);
     await apis.copyfileFn({src: fullpath, dst: type === 'dir' ? fullpath : path});
     message.success('拷贝成功！');
     updateList(path);
@@ -130,7 +131,7 @@ const Index = props => {
     });
   };
   const handleInput = async ({filename, action, label}) => {
-    setValue(`${path}/${filename}`);
+    setValue(fixPath(`${path}/${filename}`));
     setAction({
       action,
       filename,
@@ -148,17 +149,17 @@ const Index = props => {
   };
   const handleApis = {
     delete: async filename => {
-      await apis.rmfileFn({path: `${path}/${filename}`});
+      await apis.rmfileFn({path: fixPath(`${path}/${filename}`)});
       message.success('删除成功！');
       updateList(path);
     },
     move: async filename => {
-      await apis.movefileFn({src: `${path}/${filename}`, dst: value});
+      await apis.movefileFn({src: fixPath(`${path}/${filename}`), dst: value});
       message.success('移动成功！');
       updateList(path);
     },
     rename: async filename => {
-      await apis.rnfileFn({path: `${path}/${filename}`, newpath: value});
+      await apis.rnfileFn({path: fixPath(`${path}/${filename}`), newpath: value});
       message.success('重命名成功！');
       updateList(path);
     },
@@ -226,7 +227,7 @@ const Index = props => {
                 return <div key={filename} className="fs-info">
                   {
                     type === 'dir' ? <Drop trigger="contextMenu" dropList={dirDrop(filename)}>
-                      <a onClick={e => changePath(`${path}/${filename}`)}>{filename}</a>
+                      <a onClick={e => changePath(fixPath(`${path}/${filename}`))}>{filename}</a>
                     </Drop> : <Drop trigger="contextMenu" dropList={fileDrop(filename)}><div>{filename}</div></Drop>
                   }
                   <div>{type}</div>

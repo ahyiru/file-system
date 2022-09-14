@@ -5,7 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 
-const {SERVER_PORT} = require('../../configs');
+const {PORT} = require('./fs/configs');
 
 const app = express();
 
@@ -15,13 +15,13 @@ app.use(bodyParser.json({limit: '30mb'}));
 app.use(bodyParser.urlencoded({limit: '30mb', extended: true}));
 app.use(compression());
 
-app.listen(SERVER_PORT, err => {
+app.listen(PORT, err => {
   if (err) {
     console.log(err);
     return false;
   }
   console.log('\nnodejs服务已启动！'.black + '✓'.green);
-  console.log(`\n监听端口: ${SERVER_PORT}`.cyan);
+  console.log(`\n监听端口: ${PORT}`.cyan);
 });
 
 // run

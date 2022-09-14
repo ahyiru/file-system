@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "postinstall": "husky install",
-    "startServer": "nodemon server/startServer/index.js",
+    "startServer": "nodemon server/index.js",
     "dev": "nodemon scripts/index.js --watch scripts/index.js",
     "start": "npm run startServer & npm run dev",
     "build": "webpack --config scripts/webpack.production.js --progress",

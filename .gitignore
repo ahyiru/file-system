@@ -48,6 +48,7 @@ __snapshots__
 cert
 
 build
+**/build
 dist
 # production
 

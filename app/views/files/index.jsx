@@ -206,7 +206,7 @@ const Index = props => {
         <div ref={fileRef}>
           <div className="fs-topbar">
             {
-              path !== '/' ? <div onClick={e => goBack()} className="fs-back">
+              !['/', '.', './'].includes(path) ? <div onClick={e => goBack()} className="fs-back">
                 <span className="ico-left" />
                 <span>返回</span>
               </div> : null

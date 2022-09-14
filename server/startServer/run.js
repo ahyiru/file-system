@@ -1,4 +1,5 @@
-const {copyfile, movefile, mkdir, touch, readfile, readdir, rmfile, rnfile} = require('../fs');
+const {copyfile, movefile, mkdir, touch, readfile, readdir, rmfile, rnfile, readAllFile} = require('../fs');
+const {MAXSIZE} = require('../fs/configs');
 
 const startServer = app => {
   app.get('/fs/readdir', async (req, res) => {
@@ -22,6 +23,10 @@ const startServer = app => {
   app.get('/fs/mkdir', async (req, res) => {
     const {path, override} = req.query;
     try {
+      const allfile = await readAllFile();
+      if (allfile.length > MAXSIZE) {
+        return res.status(403).send({message: '超过最大文件数量，请删除后再试！'});
+      }
       await mkdir(path, override);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
@@ -31,6 +36,10 @@ const startServer = app => {
   app.get('/fs/touch', async (req, res) => {
     const {path, override} = req.query;
     try {
+      const allfile = await readAllFile();
+      if (allfile.length > MAXSIZE) {
+        return res.status(403).send({message: '超过最大文件数量，请删除后再试！'});
+      }
       await touch(path, override);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
@@ -40,6 +49,10 @@ const startServer = app => {
   app.get('/fs/copyfile', async (req, res) => {
     const {src, dst} = req.query;
     try {
+      const allfile = await readAllFile();
+      if (allfile.length > MAXSIZE) {
+        return res.status(403).send({message: '超过最大文件数量，请删除后再试！'});
+      }
       await copyfile(src, dst);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {

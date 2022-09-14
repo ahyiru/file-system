@@ -46,4 +46,37 @@ const readdir = async dir => {
   return result;
 };
 
-module.exports = {readfile, readdir};
+const readAllFile = async (dir = '') => {
+  dir = fixpath(dir);
+  if (!fs.existsSync(dir)) {
+    throw Error(`[${dir}] 文件夹不存在!`);
+  }
+  const files = await fs.readdirSync(dir);
+  const result = [];
+  for(let i = 0, l = files.length; i < l; i++) {
+    const fullname = `${dir}/${files[i]}`;
+    const stats = await fs.statSync(fullname);
+    if (stats.isFile()) {
+      result.push({
+        fullname,
+        type: fullname.split('.').slice(-1)[0],
+        size: stats.size,
+        mtime: stats.mtime,
+        birthtime: stats.birthtime,
+      });
+    } else if (stats.isDirectory()) {
+      result.push({
+        fullname,
+        type: 'dir',
+        size: stats.size,
+        mtime: stats.mtime,
+        birthtime: stats.birthtime,
+      });
+      const children = await readAllFile(fullname);
+      result.push(...children);
+    }
+  }
+  return result;
+};
+
+module.exports = {readfile, readdir, readAllFile};

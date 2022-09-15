@@ -30,7 +30,7 @@ const startServer = app => {
       await mkdir(path, override);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
   app.get('/fs/touch', async (req, res) => {
@@ -43,7 +43,7 @@ const startServer = app => {
       await touch(path, override);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
   app.get('/fs/copyfile', async (req, res) => {
@@ -56,7 +56,7 @@ const startServer = app => {
       await copyfile(src, dst);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
   app.get('/fs/movefile', async (req, res) => {
@@ -65,7 +65,7 @@ const startServer = app => {
       await movefile(src, dst);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
   app.get('/fs/rmfile', async (req, res) => {
@@ -74,7 +74,7 @@ const startServer = app => {
       await rmfile(path);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
   app.get('/fs/rnfile', async (req, res) => {
@@ -83,7 +83,7 @@ const startServer = app => {
       await rnfile(path, newpath);
       res.status(200).send({message: '操作成功！'});
     } catch (error) {
-      res.status(500).send({error});
+      res.status(500).send({message: error.message});
     }
   });
 };

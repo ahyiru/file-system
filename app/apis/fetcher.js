@@ -1,10 +1,10 @@
 import {fetcher, storage, wrapPromise, message} from '@huxy/utils';
 
-const {PROXY} = require('@configs');
-
-const TARGET = PROXY?.prefix ?? '/api';
+import configs from '@app/configs';
 
 import {logout} from '@app/utils/utils';
+
+const TARGET = configs.PROXY?.prefix ?? '/api';
 
 const success_code = [200, 10000];
 

@@ -1,4 +1,6 @@
-import {browserRouter, basepath} from '.';
+import configs from '.';
+
+const {browserRouter, basepath} = configs;
 
 const initPath = `${browserRouter ? '' : '#'}/`;
 

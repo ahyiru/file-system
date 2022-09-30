@@ -16,13 +16,13 @@ import defUser from '@app/assets/images/user/2.png';
 import wx from '@app/assets/images/wx.jpg';
 import langList from './langList';
 
-import {buildTime} from '.';
+import configs from '.';
 
 const {version} = require('../../package.json');
 
 const changeLang = ({key}) => langStore.setState(key);
 
-const buildInfo = buildTime ? [
+const buildInfo = configs.buildTime ? [
   {
     divider: true,
     key: 'version',
@@ -30,7 +30,7 @@ const buildInfo = buildTime ? [
     name: 'version',
     icon: 'ico-upload',
     handle: item => {
-      message.info(`version：${version}，构建时间：${formatTime(buildTime)}`);
+      message.info(`version：${version}，构建时间：${formatTime(configs.buildTime)}`);
     },
   },
 ] : [];

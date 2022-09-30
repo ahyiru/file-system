@@ -7,7 +7,7 @@ const getTheme = (index = null) => {
   if (index != null) {
     return themeList[index] ?? themeList[0] ?? {};
   }
-  const theme = storage.get('theme') ?? themeList[0] ?? {};
+  const theme = storage.get('theme') ?? themeList[4] ?? {};
   return theme;
 };
 
